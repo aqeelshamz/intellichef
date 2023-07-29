@@ -4,7 +4,7 @@ import axios from "axios";
 import { serverURL } from "../../../../utils/utils";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { FiClock, FiStar, FiZap } from "react-icons/fi";
+import { FiClock, FiCopy, FiStar, FiTrash, FiZap } from "react-icons/fi";
 
 type Params = {
     params: {
@@ -47,8 +47,15 @@ export default function Page({ params: { recipeId } }: Params) {
     }, []);
 
     return <div className="animate-fade-in-bottom flex flex-col w-full h-full overflow-y-auto">
-        <p className="font-bold text-2xl mb-4">{recipe?.recipeName}</p>
-        <p className="flex items-center font-semibold text-lg mb-2"><FiClock className="mr-2" /> {recipe?.preparationTime}</p>
+        <div className="flex justify-between items-center mb-4">
+            <p className="font-bold text-2xl">{recipe?.recipeName}</p>
+            <div className="flex">
+                <label className="btn btn-sm mr-2"><FiCopy className="mr-1" />Copy</label>
+                <label className="btn btn-sm mr-2"><FiTrash className="mr-1" />Delete</label>
+            </div>
+        </div>
+        <hr />
+        <p className="flex items-center font-semibold text-lg my-4"><FiClock className="mr-2" /> {recipe?.preparationTime}</p>
         <p className="flex items-center font-semibold text-lg normal-case"><FiZap className="mr-2" />Difficulty: {recipe?.difficulty}</p>
         <p className="flex items-center font-semibold text-lg normal-case mt-7 mb-2">Ingredients:</p>
         <ul className="ml-4">

@@ -83,7 +83,8 @@ export default function Page() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </label></Link>
         </div>
-        <p className="flex items-center font-semibold text-xl mb-7">🍳 New Recipe</p>
+        <p className="flex items-center font-bold text-2xl">🍳 New Recipe</p>
+        <hr className="my-5"/>
         <div className="flex flex-col mb-7 max-sm:flex-wrap">
             <p className="mr-2 font-semibold mb-2">What ingredients do you have available?</p>
             {/* <div className="flex">
@@ -103,8 +104,8 @@ export default function Page() {
                 }
             </div>
             <div className="flex">
-                <label htmlFor="ingredients_list_modal" className="btn mr-2">+ Add Items</label>
-                {/* <label htmlFor="ingredients_list_modal" className="btn mr-2">+ Add Custom Item</label> */}
+                <label htmlFor="ingredients_list_modal" className="btn mr-2">+ Add Ingredients</label>
+                <label htmlFor="ingredients_list_modal" className="btn btn-ghost mr-2">+ Add Custom Ingredient</label>
             </div>
         </div>
         <div className="flex flex-col mb-7 max-sm:flex-wrap">
@@ -126,7 +127,8 @@ export default function Page() {
                 }
             </div>
             <div className="flex">
-                <label htmlFor="kitchentools_list_modal" className="btn mr-2">+ Add Items</label>
+                <label htmlFor="kitchentools_list_modal" className="btn mr-2">+ Add Kitchen Tools</label>
+                <label htmlFor="kitchentools_list_modal" className="btn btn-ghost mr-2">+ Add Custom Kitchen Tool</label>
             </div>
         </div>
         <div className="mt-7 flex items-center max-sm:flex-col">

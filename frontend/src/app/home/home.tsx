@@ -5,12 +5,14 @@ import { FiPlus, FiUser, FiMoreHorizontal, FiSettings, FiLogOut, FiClock } from 
 import Link from 'next/link';
 import axios from "axios";
 import { serverURL } from "../../utils/utils";
+import { usePathname } from "next/navigation";
 
 export default function Home({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathName = usePathname();
   const [showMenu, setShowMenu] = useState(false);
   const [recipes, setRecipes] = useState<any>([]);
 
@@ -55,7 +57,7 @@ export default function Home({
             recipes.map((recipe: any) => {
               return (
                 <Link href={`/home/recipe/${recipe._id}`} key={recipe._id}>
-                  <div className='btn text-left justify-start normal-case w-full mb-2'>
+                  <div className={'btn text-left justify-start normal-case w-full mb-1 ' + (pathName.includes(recipe._id) ? "btn" : "btn-ghost") }>
                     <p className="font-semibold">{recipe.recipeName}</p>
                   </div>
                 </Link>
