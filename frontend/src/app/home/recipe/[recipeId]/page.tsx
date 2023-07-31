@@ -42,16 +42,42 @@ export default function Page({ params: { recipeId } }: Params) {
             });
     }
 
+    const deleteRecipe = async () => {
+        const config = {
+            method: "POST",
+            url: `${serverURL}/recipe/delete`,
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": `application/json`,
+            },
+            data: {
+                recipeId: recipeId
+            }
+        };
+
+        axios(config)
+            .then((response) => {
+                toast.success("Recipe deleted!");
+                window.location.href = "/home/";
+            })
+            .catch((error) => {
+                toast.error("Failed to delete recipe");
+            });
+    }
+
     useEffect(() => {
         getRecipe();
     }, []);
 
     return <div className="animate-fade-in-bottom flex flex-col w-full h-full overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-            <p className="font-bold text-2xl">{recipe?.recipeName}</p>
+            <p className="flex items-center font-bold text-2xl">{recipe?.recipeName}<FiCopy className="cursor-pointer ml-4" onClick={() => {
+                var data = `*${recipe?.recipeName}*\n\n*⌚ Preperation Time:*\n${recipe?.preparationTime}\n\n*⚡ Difficulty:* ${recipe?.difficulty}\n\n*📝 Ingredients:*\n${recipe?.ingredients.join("\n")}\n\n*🍽️ Kitchen Tools:*\n${recipe?.kitchenTools.join("\n")}\n\n*📃 Instructions:*\n${recipe?.instructions.join("\n")}\n\n*🍎 Nutrition Info:*\n${recipe?.nutritionInfo.join("\n")}\n\n[IntelliChef]`;
+                navigator.clipboard.writeText(data);
+                toast.success("Copied to clipboard!");
+            }} /></p>
             <div className="flex">
-                <label className="btn btn-sm mr-2"><FiCopy className="mr-1" />Copy</label>
-                <label className="btn btn-sm mr-2"><FiTrash className="mr-1" />Delete</label>
+                <label htmlFor="deleterecipe_modal" className="btn btn-sm mr-2"><FiTrash className="mr-1" />Delete</label>
             </div>
         </div>
         <hr />
@@ -89,6 +115,19 @@ export default function Page({ params: { recipeId } }: Params) {
                 })
             }
         </ul>
+        {/* Delete Recipe Modal */}
+        <input type="checkbox" id="deleterecipe_modal" className="modal-toggle" />
+        <div className="modal">
+            <div className="modal-box">
+                <h3 className="flex items-center font-bold text-lg"><FiTrash className="mr-1" /> Delete Recipe</h3>
+                <p className="py-4">Are you sure want to delete this recipe?</p>
+                <div className="modal-action">
+                    <label htmlFor="deleterecipe_modal" className="btn">Cancel</label>
+                    <label htmlFor="deleterecipe_modal" className="btn btn-error" onClick={() => deleteRecipe()}>Delete</label>
+                </div>
+            </div>
+            <label className="modal-backdrop" htmlFor="deleterecipe_modal">Cancel</label>
+        </div>
         <ToastContainer />
     </div>
 }

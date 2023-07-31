@@ -11,7 +11,11 @@ const protien = ["🥩 Beef", "🍗 Chicken", "🐟 Fish"];
 const sweetnersAndSpices = ["🍯 Brown Sugar", "🌶️ Chili Powder", "🍯 Ginger", "🍯 Honey", "🌰 Nutmeg", "🌶️ Paprika", "🌶️ Pepper", "🧂 Salt", "🍬 Sugar", "🍯 Turmeric"];
 const vegetables = ["🥑 Avocado", "🌶️ Bell Peppers", "🥦 Broccoli", "🥕 Carrots", "🥦 Cauliflower", "🥒 Cucumbers", "🧄 Garlic", "🧅 Onion", "🥔 Potatoes", "🥬 Spinach", "🍅 Tomatoes"];
 
-const ingredients = {
+type IngredientsType = {
+    [key: string]: string[]
+}
+
+const ingredients: IngredientsType = {
     "🥧 Baking Ingredients": bakingIngredients,
     "🧀🥚 Dairy and Eggs": dairyAndEggs,
     "🍎🍌 Fruits": fruits,

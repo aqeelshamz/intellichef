@@ -15,6 +15,7 @@ export default function Home({
   const pathName = usePathname();
   const [showMenu, setShowMenu] = useState(false);
   const [recipes, setRecipes] = useState<any>([]);
+  const [user, setUser] = useState<any>(null);
 
   const getRecipes = async () => {
     const config = {
@@ -28,8 +29,8 @@ export default function Home({
 
     axios(config)
       .then((response) => {
-        console.log(response.data);
-        setRecipes(response.data);
+        setRecipes(response.data.recipes);
+        setUser(response.data.user);
       })
   }
 
@@ -74,7 +75,7 @@ export default function Home({
                   <span><FiUser /></span>
                 </div>
               </div>
-              <p className='font-semibold'>User</p>
+              <p className='font-semibold'>{user?.name}</p>
             </div>
             <FiMoreHorizontal />
           </div>
